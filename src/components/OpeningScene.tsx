@@ -93,7 +93,6 @@ export default function OpeningScene({
           className="opening-scene__video"
           playsInline
           muted
-          defaultMuted
           preload="auto"
           onEnded={handleVideoEnd}
         >
