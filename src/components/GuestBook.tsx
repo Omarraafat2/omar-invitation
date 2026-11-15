@@ -1,8 +1,10 @@
+
 "use client";
 
 import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
-import { Heart, Send, CheckCircle2 } from "lucide-react";
+import { Heart, Send } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 type Props = {
   language: "en" | "ar";
@@ -17,9 +19,7 @@ export default function GuestBook({ language }: Props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = async (
-    event: FormEvent<HTMLFormElement>
-  ) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!name.trim() || !message.trim()) return;
@@ -28,35 +28,17 @@ export default function GuestBook({ language }: Props) {
     setError("");
 
     try {
-      const accessKey =
-        process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+      const { error: insertError } = await supabase
+        .from("guestbook")
+        .insert({
+          name: name.trim(),
+          message: message.trim(),
+          language,
+          source: "omar",
+        });
 
-      if (!accessKey) {
-        throw new Error("Missing Web3Forms access key");
-      }
-
-      const response = await fetch(
-        "https://api.web3forms.com/submit",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            access_key: accessKey,
-            name: name.trim(),
-            message: message.trim(),
-            language,
-            subject: `New GuestBook Message from ${name.trim()}`,
-          }),
-        }
-      );
-
-      const result = await response.json();
-
-      if (!response.ok || !result.success) {
-        throw new Error(result.message || "Failed to send message");
+      if (insertError) {
+        throw insertError;
       }
 
       setSubmitted(true);
@@ -76,10 +58,7 @@ export default function GuestBook({ language }: Props) {
   };
 
   return (
-    <section
-      className="guestbook-section"
-      dir={isArabic ? "rtl" : "ltr"}
-    >
+    <section className="guestbook-section" dir={isArabic ? "rtl" : "ltr"}>
       <motion.div
         className="guestbook-section__content"
         initial={{ opacity: 0, y: 35 }}
@@ -88,18 +67,12 @@ export default function GuestBook({ language }: Props) {
         transition={{ duration: 0.8 }}
       >
         <span className="section-eyebrow">
-          {isArabic
-            ? "اتركوا لنا رسالة"
-            : "KINDLY LEAVE US A NOTE"}
+          {isArabic ? "اتركوا لنا رسالة" : "KINDLY LEAVE US A NOTE"}
         </span>
 
-        <div className="guestbook-section__ornament">
-          ✦ ❦ ✦
-        </div>
+        <div className="guestbook-section__ornament">✦ ❦ ✦</div>
 
-        <h2>
-          {isArabic ? "رسالة صغيرة لنا" : "Guest Book"}
-        </h2>
+        <h2>{isArabic ? "رسالة صغيرة لنا" : "Guest Book"}</h2>
 
         <p className="guestbook-section__description">
           {isArabic
@@ -119,9 +92,7 @@ export default function GuestBook({ language }: Props) {
             </div>
 
             <h3>
-              {isArabic
-                ? "شكرًا على محبتكم!"
-                : "Thank You for Your Love!"}
+              {isArabic ? "شكرًا على محبتكم!" : "Thank You for Your Love!"}
             </h3>
 
             <p>
@@ -139,24 +110,15 @@ export default function GuestBook({ language }: Props) {
             </button>
           </motion.div>
         ) : (
-          <form
-            className="guestbook-form"
-            onSubmit={handleSubmit}
-          >
+          <form className="guestbook-form" onSubmit={handleSubmit}>
             <label className="guestbook-form__field">
-              <span>
-                {isArabic ? "اسمك" : "YOUR NAME"}
-              </span>
+              <span>{isArabic ? "اسمك" : "YOUR NAME"}</span>
 
               <input
                 type="text"
                 value={name}
-                onChange={(event) =>
-                  setName(event.target.value)
-                }
-                placeholder={
-                  isArabic ? "اكتب اسمك هنا..." : "Enter your name..."
-                }
+                onChange={(event) => setName(event.target.value)}
+                placeholder={isArabic ? "اكتب اسمك هنا..." : "Enter your name..."}
                 maxLength={100}
                 autoComplete="name"
                 required
@@ -166,16 +128,12 @@ export default function GuestBook({ language }: Props) {
 
             <label className="guestbook-form__field">
               <span>
-                {isArabic
-                  ? "رسالة للعروسين"
-                  : "YOUR WISHES FOR THE COUPLE"}
+                {isArabic ? "رسالة للعروسين" : "YOUR WISHES FOR THE COUPLE"}
               </span>
 
               <textarea
                 value={message}
-                onChange={(event) =>
-                  setMessage(event.target.value)
-                }
+                onChange={(event) => setMessage(event.target.value)}
                 placeholder={
                   isArabic
                     ? "اكتب رسالتك أو أمنيتك الجميلة..."
@@ -226,9 +184,7 @@ export default function GuestBook({ language }: Props) {
         <div className="guestbook-section__footer">
           <Heart size={13} />
           <span>
-            {isArabic
-              ? "بكل الحب، عمر وآية"
-              : "WITH LOVE, OMAR & AYA"}
+            {isArabic ? "بكل الحب، عمر وآية" : "WITH LOVE, OMAR & AYA"}
           </span>
           <Heart size={13} />
         </div>

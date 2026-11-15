@@ -939,6 +939,330 @@ button {
     letter-spacing: 0.12em;
   }
 }
+
+.admin-login {
+  min-height: 100svh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      ellipse at 50% 45%,
+      rgba(111, 66, 66, 0.22),
+      transparent 55%
+    ),
+    #190a0e;
+  color: #f5e9d6;
+  isolation: isolate;
+}
+
+.admin-login__background {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.admin-login__star {
+  position: absolute;
+  color: #c5a16a;
+  opacity: 0.35;
+  animation: admin-float 6s ease-in-out infinite;
+}
+
+.admin-login__star--one {
+  top: 14%;
+  left: 13%;
+  font-size: 35px;
+}
+
+.admin-login__star--two {
+  top: 25%;
+  right: 15%;
+  font-size: 45px;
+  animation-delay: 1s;
+}
+
+.admin-login__star--three {
+  bottom: 15%;
+  left: 20%;
+  font-size: 25px;
+  animation-delay: 2s;
+}
+
+.admin-login__circle {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border: 1px solid rgba(197, 161, 106, 0.09);
+  border-radius: 50%;
+}
+
+.admin-login__circle--one {
+  top: -220px;
+  right: -150px;
+}
+
+.admin-login__circle--two {
+  bottom: -260px;
+  left: -160px;
+  width: 520px;
+  height: 520px;
+}
+
+.admin-login__card {
+  width: 100%;
+  max-width: 460px;
+  padding: 48px 46px 35px;
+  position: relative;
+  background: linear-gradient(
+    145deg,
+    rgba(54, 31, 34, 0.97),
+    rgba(37, 19, 23, 0.98)
+  );
+  border: 1px solid rgba(197, 161, 106, 0.42);
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.35),
+    inset 0 0 35px rgba(197, 161, 106, 0.025);
+}
+
+.admin-login__top-ornament {
+  text-align: center;
+  color: #c5a16a;
+  font-size: 19px;
+  letter-spacing: 8px;
+  margin-bottom: 24px;
+}
+
+.admin-login__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+}
+
+.admin-login__brand-names {
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(42px, 8vw, 58px);
+  color: #d6b47c;
+  line-height: 1.2;
+}
+
+.admin-login__brand-names span {
+  color: #f2dfbd;
+  font-size: 0.8em;
+}
+
+.admin-login__brand-date {
+  font-family: "Montserrat", sans-serif;
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: #c4a779;
+}
+
+.admin-login__divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  margin: 30px 0;
+  color: #c5a16a;
+}
+
+.admin-login__divider span {
+  width: 65px;
+  height: 1px;
+  background: rgba(197, 161, 106, 0.4);
+}
+
+.admin-login__heading {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.admin-login__eyebrow {
+  color: #c5a16a;
+  font-family: "Montserrat", sans-serif;
+  font-size: 9px;
+  letter-spacing: 4px;
+}
+
+.admin-login__heading h1 {
+  margin: 12px 0;
+  color: #f5e9d6;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 42px;
+  font-weight: 500;
+}
+
+.admin-login__heading p {
+  margin: 0;
+  color: rgba(245, 233, 214, 0.65);
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
+  line-height: 1.9;
+}
+
+.admin-login__form {
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+}
+
+.admin-login__field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-login__field > span {
+  color: #dfc69f;
+  font-family: "Montserrat", sans-serif;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
+.admin-login__input-wrapper {
+  min-height: 51px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 15px;
+  border: 1px solid rgba(197, 161, 106, 0.27);
+  background: rgba(17, 8, 11, 0.35);
+  color: #c5a16a;
+  transition: border-color 0.25s, background 0.25s;
+}
+
+.admin-login__input-wrapper:focus-within {
+  border-color: #c5a16a;
+  background: rgba(17, 8, 11, 0.55);
+}
+
+.admin-login__input-wrapper input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #f5e9d6;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+}
+
+.admin-login__input-wrapper input::placeholder {
+  color: rgba(245, 233, 214, 0.35);
+}
+
+.admin-login__password-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border: 0;
+  background: transparent;
+  color: #c5a16a;
+  cursor: pointer;
+}
+
+.admin-login__submit {
+  width: 100%;
+  min-height: 53px;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  border: 1px solid #d4b47b;
+  background: linear-gradient(110deg, #b18b52, #d0ad72);
+  color: #211014;
+  font-family: "Montserrat", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  cursor: pointer;
+  transition: box-shadow 0.25s, opacity 0.25s;
+}
+
+.admin-login__submit:hover {
+  box-shadow: 0 8px 25px rgba(197, 161, 106, 0.2);
+}
+
+.admin-login__submit:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.admin-login__error {
+  margin: -5px 0 0;
+  color: #f0a3a3;
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
+  text-align: center;
+}
+
+.admin-login__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 35px;
+  color: #c5a16a;
+}
+
+.admin-login__footer span {
+  font-family: "Montserrat", sans-serif;
+  font-size: 8px;
+  letter-spacing: 2.5px;
+}
+
+.admin-login__copyright {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: rgba(197, 161, 106, 0.45);
+  font-family: "Montserrat", sans-serif;
+  font-size: 8px;
+  letter-spacing: 3px;
+}
+
+@keyframes admin-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@media (max-width: 520px) {
+  .admin-login {
+    padding: 25px 16px 55px;
+  }
+
+  .admin-login__card {
+    padding: 38px 24px 30px;
+  }
+
+  .admin-login__heading h1 {
+    font-size: 36px;
+  }
+
+  .admin-login__star--one {
+    left: 5%;
+  }
+
+  .admin-login__star--two {
+    right: 5%;
+  }
+}
+
 /* =========================================
    FOOTER
 ========================================= */
